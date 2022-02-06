@@ -2,21 +2,13 @@
 
 using namespace std;
 
-void dayTimeEdit(const char *tempDayTime, char dayTime[15])
-{
-    for (int i = 0; i < sizeof(tempDayTime); i++)
-    {
-        dayTime[i] = tempDayTime[i];
-    }
-}
-
 int main()
 {
     do
     {
         /* code */
 
-        int hours, minutes;
+        int hours, minutes, d;
         char dayTime[15] = "";
         cout << "Введите часы и минуты" << endl;
         cin >> hours >> minutes;
@@ -40,19 +32,19 @@ int main()
                 // обработка времени суток
                 if (hours == 24 || hours >= 0 && hours < 5)
                 {
-                    dayTimeEdit("ночи", dayTime);
+                    d = 1; //night
                 }
                 else if (hours >= 5 && hours < 12)
                 {
-                    dayTimeEdit("утра", dayTime);
+                    d = 2; //morning
                 }
                 else if (hours >= 12 && hours < 18)
                 {
-                    dayTimeEdit("дня", dayTime);
+                    d = 3; // day
                 }
                 else
                 {
-                    dayTimeEdit("вечера", dayTime);
+                    d = 4; // evening
                 }
                 // перевод в 12-часовую систему
                 if (hours > 12)
@@ -63,10 +55,6 @@ int main()
                 if (hours == 12)
                 {
                     cout << hours << " часов ";
-                }
-                else if (hours % 10 == 1)
-                {
-                    cout << hours << " час ";
                 }
                 else if (hours % 10 == 2 || hours % 10 == 3 || hours % 10 == 4)
                 {
@@ -81,7 +69,25 @@ int main()
 
                 if (minutes == 0)
                 {
-                    cout << dayTime << " ровно";
+                    switch (d)
+                    {
+                    case 1:
+                        cout << "ночи";
+                        break;
+                    case 2:
+                        cout << "утра";
+                        break;
+                    case 3:
+                        cout << "дня";
+                        break;
+                    case 4:
+                        cout << "вечера";
+                        break;
+
+                    default:
+                        break;
+                    }
+                    cout << " ровно";
                 }
                 else
                 {
@@ -102,7 +108,24 @@ int main()
                         cout << minutes << " минут ";
                     }
 
-                    cout << dayTime;
+                    switch (d)
+                    {
+                    case 1:
+                        cout << " ночи";
+                        break;
+                    case 2:
+                        cout << " утра";
+                        break;
+                    case 3:
+                        cout << " дня";
+                        break;
+                    case 4:
+                        cout << " вечера";
+                        break;
+
+                    default:
+                        break;
+                    }
                 }
             }
         }
